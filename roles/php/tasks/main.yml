@@ -1,19 +1,19 @@
 ---
-- name: Add PHP 7.3 PPA
+- name: Add PHP 7.2 PPA
   apt_repository:
     repo: "ppa:ondrej/php"
     update_cache: yes
 
-- name: Install PHP 7.3
+- name: Install PHP 7.2
   apt:
     name: "{{ item.key }}"
     state: "{{ item.value }}"
     cache_valid_time: "{{ apt_cache_valid_time }}"
   with_dict: "{{ php_extensions }}"
 
-- name: Start php7.3-fpm service
+- name: Start php7.2-fpm service
   service:
-    name: php7.3-fpm
+    name: php7.2-fpm
     state: started
     enabled: true
 
@@ -34,5 +34,5 @@
 - name: PHP configuration file
   template:
     src: php.ini.j2
-    dest: /etc/php/7.3/fpm/php.ini
+    dest: /etc/php/7.2/fpm/php.ini
   notify: reload php-fpm
